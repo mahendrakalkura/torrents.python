@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from re import sub
+
 from grequests import get, map
 from scrapy import Selector
 from terminaltables import AsciiTable
@@ -22,7 +24,7 @@ for response in map(
     for tr in selector.xpath('//table[@id="searchResult"]/tr'):
         if len(tr.xpath('./td')) != 4:
             continue
-        a = tr.xpath('./td[1]')[0].xpath('string()').extract()[0].strip().replace('\n', ' - ')
+        a = sub(r'\s+', ' ', tr.xpath('./td[1]')[0].xpath('string()').extract()[0].strip().replace('\n', ' - '))
         b = tr.xpath('./td[3]').xpath('string()').extract()[0].strip()
         if int(b) <= 99:
             continue

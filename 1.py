@@ -12,11 +12,11 @@ for response in map(
     (
         get(url)
         for url in [
-            'http://thepiratebay.se/recent/{page}'.format(page=page)
+            'https://pirateproxy.yt/recent/{page}'.format(page=page)
             for page in range(0, 29)
         ] + [
-            'http://thepiratebay.se/top/48h200',
-            'http://thepiratebay.se/top/48h500',
+            'https://pirateproxy.yt/top/48h200',
+            'https://pirateproxy.yt/top/48h500',
         ]
     )
 ):
@@ -29,7 +29,7 @@ for response in map(
         if int(b) <= 99:
             continue
         c = tr.xpath('./td[2]/div/a/text()').extract()[0].strip().replace('\n', ' - ')
-        d = 'http://thepiratebay.se{path}'.format(path=tr.xpath('./td[2]/div/a/@href').extract()[0].strip())
+        d = 'https://pirateproxy.yt{path}'.format(path=tr.xpath('./td[2]/div/a/@href').extract()[0].strip())
         if c not in items:
             items[c] = [a, b, c, d]
         else:
